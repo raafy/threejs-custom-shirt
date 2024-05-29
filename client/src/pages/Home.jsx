@@ -8,10 +8,9 @@ import {
   slideAnimation,
 } from "../config/motion";
 import { setIntro } from "../store/globalSlice";
-import type { RootState } from "../store/store";
 
 export default function Home() {
-  const isIntro = useSelector((state: RootState) => state.global.intro);
+  const isIntro = useSelector((state) => state.global.intro);
   const dispatch = useDispatch();
   return (
     <AnimatePresence>
