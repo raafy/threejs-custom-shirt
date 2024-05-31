@@ -1,8 +1,8 @@
-import Canvas from "./canvas";
-import Customizer from "./pages/Customizer";
-import Home from "./pages/Home";
+import Canvas from './canvas';
+import Home from './pages/Home';
+import Customizer from './pages/Customizer';
 
-export default function App() {
+function App() {
   return (
     <main className="transition-all ease-in app">
       <Home />
@@ -11,3 +11,5 @@ export default function App() {
     </main>
   );
 }
+
+export default App;
