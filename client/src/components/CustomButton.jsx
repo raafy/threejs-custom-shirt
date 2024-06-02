@@ -1,17 +1,22 @@
-import { useSelector } from "react-redux";
+import PropTypes from 'prop-types';
+import { useSnapshot } from 'valtio';
+import state from '../store';
+import { getContrastingColor } from '../config/helpers';
 
-export default function CustomButton({
-  title,
-  type,
-  customStyles,
-  handleClick,
-}) {
-  const bgColor = useSelector((state) => state.global.color);
+function CustomButton({ title, type, customStyles, handleClick }) {
+  const snap = useSnapshot(state);
+
   const generateStyle = (type) => {
-    if (type === "filled") {
+    if (type === 'filled') {
       return {
-        backgroundColor: bgColor,
-        color: "#fff",
+        backgroundColor: snap.color,
+        color: getContrastingColor(snap.color),
+      };
+    } else if (type === 'outline') {
+      return {
+        borderWidth: '1px',
+        borderColor: snap.color,
+        color: snap.color,
       };
     }
   };
@@ -26,3 +31,12 @@ export default function CustomButton({
     </button>
   );
 }
+
+CustomButton.propTypes = {
+  title: PropTypes.string,
+  type: PropTypes.string,
+  customStyles: PropTypes.string,
+  handleClick: PropTypes.func,
+};
+
+export default CustomButton;

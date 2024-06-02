@@ -1,23 +1,20 @@
-import { Decal, useGLTF, useTexture } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { easing } from "maath";
-import { useSelector } from "react-redux";
+import { Decal, useGLTF, useTexture } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { easing } from 'maath';
+import { useSnapshot } from 'valtio';
+import state from '../store';
 
-export default function Shirt() {
-  const logoDecal = useSelector((state) => state.global.logoDecal);
-  const fullDecal = useSelector((state) => state.global.fullDecal);
-  const isFullTexture = useSelector((state) => state.global.isFullTexture);
-  const isLogoTexture = useSelector((state) => state.global.isLogoTexture);
-  const color = useSelector((state) => state.global.color);
-  const { nodes, materials } = useGLTF("/shirt_baked.glb");
-  const logoTexture = useTexture(logoDecal);
-  const fullTexture = useTexture(fullDecal);
+function Shirt() {
+  const snap = useSnapshot(state);
+  const { nodes, materials } = useGLTF('/shirt_baked.glb');
+  const logoTexture = useTexture(snap.logoDecal);
+  const fullTexture = useTexture(snap.fullDecal);
 
-  useFrame((_state, delta) =>
-    easing.dampC(materials.lambert1.color, color, 0.25, delta)
-  );
+  useFrame((_state, delta) => {
+    easing.dampC(materials.lambert1.color, snap.color, 0.25, delta);
+  });
 
-  const stateString = JSON.stringify(useSelector((state) => state.global));
+  const stateString = JSON.stringify(snap);
 
   return (
     <group key={stateString}>
@@ -28,7 +25,7 @@ export default function Shirt() {
         material-roughness={1}
         dispose={null}
       >
-        {isFullTexture && (
+        {snap.isFullTexture && (
           <Decal
             position={[0, 0, 0]}
             rotation={[0, 0, 0]}
@@ -36,7 +33,7 @@ export default function Shirt() {
             map={fullTexture}
           />
         )}
-        {isLogoTexture && (
+        {snap.isLogoTexture && (
           <Decal
             position={[0, 0.04, 0.15]}
             rotation={[0, 0, 0]}
@@ -50,3 +47,5 @@ export default function Shirt() {
     </group>
   );
 }
+
+export default Shirt;

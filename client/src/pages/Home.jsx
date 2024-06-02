@@ -1,49 +1,50 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
-import { CustomButton } from "../components";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useSnapshot } from 'valtio';
 import {
   headContainerAnimation,
   headContentAnimation,
   headTextAnimation,
   slideAnimation,
-} from "../config/motion";
-import { setIntro } from "../store/globalSlice";
+} from '../config/motion';
+import state from '../store';
+import { CustomButton } from '../components';
 
-export default function Home() {
-  const isIntro = useSelector((state) => state.global.intro);
-  const dispatch = useDispatch();
+function Home() {
+  const snap = useSnapshot(state);
+
   return (
     <AnimatePresence>
-      {isIntro && (
-        <motion.section className="home" {...slideAnimation("left")}>
-          <motion.header {...slideAnimation("down")}>
+      {snap.intro && (
+        <motion.section className="home" {...slideAnimation('left')}>
+          <motion.header {...slideAnimation('down')}>
             <img
               src="./threejs.png"
-              alt="logo"
+              alt="Logo"
               className="object-contain w-8 h-8"
             />
           </motion.header>
           <motion.div className="home-content" {...headContainerAnimation}>
             <motion.div {...headTextAnimation}>
               <h1 className="head-text">
-                LET&apos;S <br className="hidden xl:block" /> DO IT.
+                LET&apos;S <br className="hidden xl:block" />
+                DO IT.
               </h1>
             </motion.div>
             <motion.div
-              {...headContentAnimation}
               className="flex flex-col gap-5"
+              {...headContentAnimation}
             >
               <p className="max-w-md text-base font-normal text-gray-600">
-                Create your unique and exclusive shirt with our brand-new 3D
-                customization tool. <strong>Unleash your imagination</strong>{" "}
-                and define your own style
+                Create your own unique and exclusive shirt with our brand-new 3D
+                customization tool. <strong>Unleash your imagination</strong>{' '}
+                and define your own style.
               </p>
               <CustomButton
                 type="filled"
                 title="Customize It"
-                handleClick={() => dispatch(setIntro(false))}
+                handleClick={() => (state.intro = false)}
                 customStyles="w-fit px-4 py-2.5 font-bold text-sm"
-              ></CustomButton>
+              />
             </motion.div>
           </motion.div>
         </motion.section>
@@ -51,3 +52,5 @@ export default function Home() {
     </AnimatePresence>
   );
 }
+
+export default Home;

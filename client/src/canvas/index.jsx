@@ -1,10 +1,10 @@
-import { Center, Environment } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import Backdrop from "./Backdrop";
-import CameraRig from "./CameraRig";
-import Shirt from "./Shirt";
+import { Center, Environment } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import Backdrop from './Backdrop';
+import CameraRig from './CameraRig';
+import Shirt from './Shirt';
 
-export default function CanvasModel() {
+function CanvasModel() {
   return (
     <Canvas
       shadows
@@ -23,3 +23,5 @@ export default function CanvasModel() {
     </Canvas>
   );
 }
+
+export default CanvasModel;

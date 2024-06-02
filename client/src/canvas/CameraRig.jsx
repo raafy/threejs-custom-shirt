@@ -1,19 +1,20 @@
-import { useFrame } from "@react-three/fiber";
-import { easing } from "maath";
-import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useFrame } from '@react-three/fiber';
+import { easing } from 'maath';
+import PropTypes from 'prop-types';
+import { useRef } from 'react';
+import { useSnapshot } from 'valtio';
+import state from '../store';
 
-export default function CameraRig({ children }) {
+function CameraRig({ children }) {
+  const snap = useSnapshot(state);
   const group = useRef();
-  const isIntro = useSelector((state) => state.global.intro);
 
   useFrame((state, delta) => {
     const isBreakpoint = window.innerWidth <= 1260;
     const isMobile = window.innerWidth <= 600;
 
     let targetPosition = [-0.4, 0, 2];
-
-    if (isIntro) {
+    if (snap.intro) {
       if (isBreakpoint) {
         targetPosition = [0, 0, 2];
       }
@@ -40,3 +41,9 @@ export default function CameraRig({ children }) {
 
   return <group ref={group}>{children}</group>;
 }
+
+CameraRig.propTypes = {
+  children: PropTypes.node,
+};
+
+export default CameraRig;
