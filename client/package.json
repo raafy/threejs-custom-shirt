@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-three/drei": "^9.106.0",
+    "@react-three/eslint-plugin": "^0.1.1",
     "@react-three/fiber": "^8.16.6",
     "framer-motion": "^11.2.9",
     "maath": "^0.10.7",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "@types/three": "^0.164.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
