@@ -7,6 +7,7 @@
 - [Introduction](#introduction)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Live Demo](#live-demo)
 
 ## Introduction
 
@@ -24,3 +25,7 @@ This project is a web-based t-shirt customizing application that allows the user
 
 - **Frontend:** React, Vite, Tailwind CSS, Valtio.
 - **Backend:** Node.js, Express, OpenAI API.
+
+## Live Demo
+
+[![](./docs/live-demo.png)](https://threejs-custom-shirt-silk.vercel.app/)
